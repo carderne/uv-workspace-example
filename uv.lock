@@ -1,0 +1,40 @@
+version = 1
+requires-python = ">=3.11"
+
+[manifest]
+members = [
+    "greeter",
+    "server",
+    "uv-workspace-example",
+]
+
+[[package]]
+name = "greeter"
+version = "0.1.0"
+source = { editable = "packages/greeter" }
+
+[[package]]
+name = "server"
+version = "0.1.0"
+source = { editable = "packages/server" }
+dependencies = [
+    { name = "greeter" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "greeter", editable = "packages/greeter" }]
+
+[[package]]
+name = "uv-workspace-example"
+version = "0.1"
+source = { virtual = "." }
+dependencies = [
+    { name = "greeter" },
+    { name = "server" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "greeter", editable = "packages/greeter" },
+    { name = "server", editable = "packages/server" },
+]
