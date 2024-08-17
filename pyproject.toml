@@ -1,0 +1,57 @@
+[tool.rye.scripts]
+fmt = "rye fmt"
+lint = "rye lint --fix"
+check = "basedpyright"
+test = "rye test"
+all = { chain = ["fmt", "lint", "check", "test"] }
+
+build = "rye build --all"
+
+[project]
+name = "una-example-packages"
+version = "0.1.0"
+description = "una example monorepo"
+authors = [
+    { name = "Chris Arderne", email = "chris@rdrn.me" }
+]
+dependencies = []
+readme = "README.md"
+requires-python = ">= 3.11"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "una>=0.1.2",
+    "basedpyright>=1.16.0",
+    "pytest>=8.3.2",
+]
+virtual = true
+
+[tool.rye.workspace]
+member = ["apps/*", "libs/*"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.una]
+style = "packages"
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+select = ["A", "E", "F", "I", "N", "T100"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["una_example_packages"]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "apps/*",
+  "libs/*"
+]
+testpaths = [
+  "apps/*",
+  "libs/*",
+]
+addopts = ""

@@ -1,0 +1,31 @@
+[project]
+name = "printer"
+version = "0.1.0"
+description = "Prints greetings from greeter"
+authors = []
+dependencies = []
+requires-python = ">= 3.11"
+dynamic = ["una"]  # needed for hatch-una metadata hook to work
+
+[build-system]
+requires = ["hatchling", "hatch-una"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.build.hooks.una-build]
+[tool.hatch.metadata.hooks.una-meta]
+
+[tool.una.libs]
+"../../libs/greeter/una_example_packages/greeter" = "una_example_packages/greeter"
+
+[tool.pyright]
+venvPath = "../.."
+venv = ".venv"
+pythonVersion = "3.11"
+strict = ["**/*.py"]
